@@ -1,0 +1,42 @@
+\documentclass{article}
+
+\usepackage[x11names]{xcolor} % page color
+
+\pagecolor[HTML]{0D1117}  % background color
+\color[HTML]{C9D1D9}      % text color
+
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\pagestyle{empty}
+
+% Define colors
+\definecolor{blue}{HTML}{003399}
+\definecolor{cyan}{HTML}{007C99}
+\definecolor{yellow}{HTML}{FFD001}
+
+\newcommand{\powerprompt}[4]{% #1 = user, #2 = datetime, #3 = path, #4 = pathlengh
+  \begin{tikzpicture}[baseline]
+    \filldraw[fill=yellow, draw=none]
+    (0,0) -- (2,0) -- (2.2,0.2) -- (2,0.4) -- (0,0.4) -- cycle;
+    \node[text=black, font=\ttfamily, anchor=center] at (1,0.15) {#1};
+  \end{tikzpicture}%
+  \begin{tikzpicture}[baseline]
+    \filldraw[fill=blue, draw=none]
+    (0,0) -- (4,0) -- (4.2,0.2) -- (4,0.4) -- (0,0.4) -- (0.2, 0.2) -- cycle;
+    \node[text=white, font=\ttfamily, anchor=center] at (2,0.15) {#2};
+  \end{tikzpicture}%
+  \begin{tikzpicture}[baseline]
+    \filldraw[fill=cyan, draw=none]
+    (0,0) -- (#4,0) -- (#4 + 0.2,0.2) -- (#4,0.4) -- (0,0.4) -- (0.2,0.2) -- cycle;
+    \node[text=white, font=\ttfamily, anchor=center] at (#4 / 2 + 0.1,0.15) {#3};
+  \end{tikzpicture}%
+}
+
+\begin{document}
+
+\powerprompt{NgTrDat}{Wed 23 Apr - 17:05}{\textasciitilde}{1}
+
+\powerprompt{NgTrDat}{Wed 23 Apr - 17:05}{\textasciitilde/Downloads}{2.8}
+
+\end{document}

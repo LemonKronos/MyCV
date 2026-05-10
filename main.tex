@@ -1,0 +1,106 @@
+\documentclass{article}
+
+\usepackage{fontspec} % terminal fonts
+\setmainfont{FantasqueSansM Nerd Font Mono Bold}
+
+\usepackage[x11names]{xcolor} % page color
+
+\pagecolor[HTML]{0D1117}  % background color black
+\pagecolor[HTML]{262E41}  % background color blue
+\color[HTML]{C9D1D9}      % text color
+
+\usepackage[margin=1in]{geometry} % shell promt
+\usepackage{xcolor}
+\usepackage{tikz}
+\pagestyle{empty}
+
+% Define colors
+\definecolor{blue}{HTML}{003399}
+\definecolor{cyan}{HTML}{007C99}
+\definecolor{yellow}{HTML}{FFD001}
+
+\newcommand{\powerprompt}[4]{% #1 = user, #2 = datetime, #3 = path, #4 = pathlengh
+  \begin{tikzpicture}[baseline]
+    \filldraw[fill=yellow, draw=none]
+    (0,0) -- (2,0) -- (2.2,0.2) -- (2,0.4) -- (0,0.4) -- cycle;
+    \node[text=black, anchor=center] at (1,0.18) {#1};
+  \end{tikzpicture}%
+  \begin{tikzpicture}[baseline]
+    \filldraw[fill=blue, draw=none]
+    (0,0) -- (4,0) -- (4.2,0.2) -- (4,0.4) -- (0,0.4) -- (0.2, 0.2) -- cycle;
+    \node[text=white, anchor=center] at (2,0.18) {#2};
+  \end{tikzpicture}%
+  \begin{tikzpicture}[baseline]
+    \filldraw[fill=cyan, draw=none]
+    (0,0) -- (#4,0) -- (#4 + 0.2,0.2) -- (#4,0.4) -- (0,0.4) -- (0.2,0.2) -- cycle;
+    \node[text=white, anchor=center] at (#4 / 2 + 0.1,0.18) {#3};
+  \end{tikzpicture}%
+}
+
+\usepackage{graphicx}
+\usepackage{float}
+
+\usepackage{fancyvrb}
+\usepackage{titlesec}
+
+\definecolor{promptblue}{RGB}{97,175,239}
+\definecolor{promptgreen}{RGB}{80,250,123}
+
+% ###########################################################
+\begin{document}
+\raggedright
+\powerprompt{NgTrDat}{Wed 20 Aug - 17:05}{\textasciitilde}{1}
+fastfetch -c \$HOME/.config/fastfetch/CV.jsonc
+
+\begin{figure}[H]
+  \begin{minipage}[t]{0.3\textwidth}
+    \includegraphics[height=13\baselineskip]{figure/HCMCUT.png}
+  \end{minipage}%
+  \hspace{0.03\textwidth}
+  \begin{minipage}[t]{0.7\textwidth}
+    \vspace{-13\baselineskip}
+    \begin{Verbatim}[commandchars=\\\{\}]
+      \textcolor{promptblue}{NgTrDat@\textbf{cv-terminal}} 
+      -----------------------------------
+      \textcolor{promptgreen}{Name}       : Nguyen Trong Dat
+      \textcolor{promptgreen}{Age}        : 21
+      \textcolor{promptgreen}{Role}       : Computer Engineering Student
+      \textcolor{promptgreen}{Focus}      : AI Drones • Embedded Systems • Linux
+      \textcolor{promptgreen}{Location}   : HCMC, Vietnam
+      \textcolor{promptgreen}{Email}      : trongdat4work@gmail.com
+      \textcolor{promptgreen}{GitHub}     : github.com/LemonKronos
+      \textcolor{promptgreen}{Languages}  : C/C++, Python, Rust, Verilog
+      \textcolor{promptgreen}{Tools}      : VSCode, Git, ROS2, PX4, Gazebo, STM32Cube
+      -----------------------------------
+      \end{Verbatim}
+  \end{minipage}
+\end{figure}
+
+\powerprompt{NgTrDat}{Wed 20 Aug - 17:06}{\textasciitilde}{1}
+cd Info \&\& cat Career\_Objective.txt\\
+
+me good\\
+me want to\\
+me have\\
+
+\powerprompt{NgTrDat}{Wed 20 Aug - 17:08}{\textasciitilde/Info}{2.2}
+cat Education.txt\\
+
+where learn\\
+
+\powerprompt{NgTrDat}{Wed 20 Aug - 17:12}{\textasciitilde/Info}{2.2}
+cat Achievements.txt\\
+
+TOIEC 970\\
+
+\powerprompt{NgTrDat}{Wed 20 Aug - 17:17}{\textasciitilde/Info}{2.2}
+cat Experiments.txt\\
+
+nothing\\
+
+\powerprompt{NgTrDat}{Wed 20 Aug - 17:17}{\textasciitilde/Info}{2.2}
+cat Others.txt\\
+
+Green summer\\
+
+\end{document}
