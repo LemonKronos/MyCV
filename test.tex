@@ -1,42 +1,207 @@
-\documentclass{article}
+\documentclass[11pt, a4paper]{article}
+
+\usepackage{fontspec} % terminal fonts
+% \setmainfont{FantasqueSansM Nerd Font Mono Bold}
 
 \usepackage[x11names]{xcolor} % page color
-
-\pagecolor[HTML]{0D1117}  % background color
-\color[HTML]{C9D1D9}      % text color
-
-\usepackage[margin=1in]{geometry}
-\usepackage{xcolor}
 \usepackage{tikz}
+\usepackage{fancyvrb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[most]{tcolorbox} 
+\usepackage{calc}            
+
+% Shrunk margins
+\usepackage[top=1cm, bottom=1cm, left=1cm, right=1cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+
 \pagestyle{empty}
 
-% Define colors
+% Page background color
+\pagecolor[HTML]{262E41}
+
+% --- THEMES & COLORS ---
+% Terminal Theme (Dark)
+\definecolor{winbg}{HTML}{0D1117}
+\definecolor{winborder}{HTML}{3E4451} 
+\definecolor{textmain}{HTML}{C9D1D9}
+
+% Notebook / Image Theme (Light)
+\definecolor{notebg}{HTML}{FDFDFD}
+\definecolor{noteborder}{HTML}{D0D7DE}
+\definecolor{notetitle}{HTML}{F6F8FA}
+\definecolor{notetext}{HTML}{24292F}
+
+% IDE Theme (VS Code / OneDark vibe)
+\definecolor{idebg}{HTML}{1E1E1E}
+\definecolor{idefg}{HTML}{D4D4D4}
+\definecolor{idetitlebg}{HTML}{252526}
+\definecolor{idegutter}{HTML}{2D2D2D} 
+\definecolor{idegutterborder}{HTML}{404040}
+
+% Prompt Colors
 \definecolor{blue}{HTML}{003399}
 \definecolor{cyan}{HTML}{007C99}
 \definecolor{yellow}{HTML}{FFD001}
+\definecolor{promptblue}{RGB}{97,175,239}
+\definecolor{promptgreen}{RGB}{80,250,123}
 
-\newcommand{\powerprompt}[4]{% #1 = user, #2 = datetime, #3 = path, #4 = pathlengh
+% Your Powerprompt Macro
+\newcommand{\powerprompt}[4]{%
   \begin{tikzpicture}[baseline]
     \filldraw[fill=yellow, draw=none]
     (0,0) -- (2,0) -- (2.2,0.2) -- (2,0.4) -- (0,0.4) -- cycle;
-    \node[text=black, font=\ttfamily, anchor=center] at (1,0.15) {#1};
+    \node[text=black, anchor=center] at (1,0.18) {#1};
   \end{tikzpicture}%
   \begin{tikzpicture}[baseline]
     \filldraw[fill=blue, draw=none]
     (0,0) -- (4,0) -- (4.2,0.2) -- (4,0.4) -- (0,0.4) -- (0.2, 0.2) -- cycle;
-    \node[text=white, font=\ttfamily, anchor=center] at (2,0.15) {#2};
+    \node[text=white, anchor=center] at (2,0.18) {#2};
   \end{tikzpicture}%
   \begin{tikzpicture}[baseline]
     \filldraw[fill=cyan, draw=none]
     (0,0) -- (#4,0) -- (#4 + 0.2,0.2) -- (#4,0.4) -- (0,0.4) -- (0.2,0.2) -- cycle;
-    \node[text=white, font=\ttfamily, anchor=center] at (#4 / 2 + 0.1,0.15) {#3};
+    \node[text=white, anchor=center] at (#4 / 2 + 0.1,0.18) {#3};
   \end{tikzpicture}%
 }
 
+% ==========================================
+% WINDOW MANAGER TEMPLATES
+% ==========================================
+
+% 1. Dark Terminal Window
+\DeclareTColorBox{twmwindow}{ O{\textwidth} m O{} }{
+    enhanced, colback=winbg, colframe=winborder, colbacktitle=winborder,
+    coltitle=textmain, coltext=textmain, fonttitle=\bfseries,
+    arc=5pt, auto outer arc, boxrule=1pt, title={#2},
+    left=8pt, right=8pt, top=8pt, bottom=8pt, boxsep=0pt, toptitle=4pt, bottomtitle=4pt,
+    nobeforeafter, width=#1, #3
+}
+
+% 2. Chill Notebook
+\DeclareTColorBox{twmnotebook}{ O{\textwidth} m O{} }{
+    enhanced, colback=notebg, colframe=noteborder, colbacktitle=notetitle,
+    coltitle=notetext, coltext=notetext, fonttitle=\bfseries,
+    arc=5pt, auto outer arc, boxrule=1pt, title={#2},
+    left=8pt, right=8pt, top=8pt, bottom=8pt, boxsep=0pt, toptitle=4pt, bottomtitle=4pt,
+    nobeforeafter, width=#1,
+    underlay={
+        \begin{tcbclipinterior}
+            \draw[red!15, line width=0.5pt, ystep=\baselineskip, xstep=50cm, shift={(interior.north west)}, yshift=-8pt-\ht\strutbox]
+            (interior.south west) grid (interior.north east);
+        \end{tcbclipinterior}
+    }, #3
+}
+
+% 3. Image Viewer
+\DeclareTColorBox{twmimage}{ O{\textwidth} m O{} }{
+    enhanced, colback=notebg, colframe=noteborder, colbacktitle=notetitle,
+    coltitle=notetext, coltext=notetext, fonttitle=\bfseries,
+    arc=5pt, auto outer arc, boxrule=1pt, title={#2},
+    left=0pt, right=0pt, top=0pt, bottom=0pt, lefttitle=8pt, righttitle=8pt,
+    boxsep=0pt, toptitle=4pt, bottomtitle=4pt,
+    nobeforeafter, width=#1, #3
+}
+
+% 4. IDE Code Snippet Window
+\DeclareTColorBox{twmide}{ O{\textwidth} m O{} }{
+    enhanced, colback=idebg, colframe=winborder, colbacktitle=idetitlebg,
+    coltitle=idefg, coltext=idefg, fonttitle=\bfseries,
+    arc=5pt, auto outer arc, boxrule=1pt, title={#2},
+    left=28pt, right=8pt, top=8pt, bottom=8pt, % extra left padding for the gutter!
+    boxsep=0pt, toptitle=4pt, bottomtitle=4pt,
+    nobeforeafter, width=#1,
+    underlay={
+        \begin{tcbclipinterior}
+            % Draw the gutter
+            \fill[idegutter] (interior.south west) rectangle ([xshift=24pt]interior.north west);
+            % Gutter separator line
+            \draw[idegutterborder, line width=0.5pt] ([xshift=24pt]interior.south west) -- ([xshift=24pt]interior.north west);
+        \end{tcbclipinterior}
+    }, #3
+}
+
+% 5. Directory Tree Window
+\DeclareTColorBox{twmtree}{ O{\textwidth} m O{} }{
+    enhanced, colback=winbg, colframe=winborder, colbacktitle=idetitlebg,
+    coltitle=textmain, coltext=textmain, fonttitle=\bfseries,
+    arc=5pt, auto outer arc, boxrule=1pt, title={#2},
+    left=8pt, right=8pt, top=8pt, bottom=8pt, boxsep=0pt, toptitle=4pt, bottomtitle=4pt,
+    nobeforeafter, width=#1, #3
+}
+
+% Layout Macros
+\newcommand{\twmgap}{\hspace{4pt}}
+\newcommand{\twmhline}{\par\vspace{4pt}\noindent}
+
+% ###########################################################
 \begin{document}
+\raggedright
 
-\powerprompt{NgTrDat}{Wed 23 Apr - 17:05}{\textasciitilde}{1}
+% --- ROW 1: IDE AND TREE (Split 50/50 with AUTO HEIGHT) ---
+% IDE Window: Note the [colback=..., coltext=...] showing you how to freely theme them!
+\begin{twmide}[\dimexpr0.5\textwidth-2pt\relax]{planner.cpp}[equal height group=row1, colback=idebg, coltext=idefg]
+    % By adding numbers=left and numbersep=12pt, the numbers perfectly hit the TikZ gutter!
+    \begin{Verbatim}[commandchars=\\\{\}, numbers=left, numbersep=12pt, formatcom=\color{idefg}]
+\textcolor{promptblue}{void} LDP_Planner::calculate_trajectory() \{
+    \textcolor{promptgreen}{// Init latent diffusion model}
+    \textcolor{promptblue}{auto} model = init_diffusion();
+    
+    \textcolor{promptblue}{if} (obstacle_detected) \{
+        \textcolor{promptblue}{return} reactive_avoidance();
+    \}
+    
+    \textcolor{promptblue}{return} model.step();
+\}
+    \end{Verbatim}
+\end{twmide}%
+\twmgap 
+\begin{twmtree}[\dimexpr0.5\textwidth-2pt\relax]{Acrobatic\_Drone\_Stack}[equal height group=row1]
+    \begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{promptblue}{PX4\_Autopilot/}
+├── \textcolor{promptgreen}{src/}
+│   ├── \textcolor{promptblue}{controller/}
+│   │   ├── main.cpp
+│   │   └── pid.hpp
+│   └── \textcolor{promptblue}{planner/}
+│       └── latent_diffusion.cpp
+├── \textcolor{promptgreen}{launch/}
+│   └── gazebo_harmonic.launch.py
+└── CMakeLists.txt
+    \end{Verbatim}
+\end{twmtree}
 
-\powerprompt{NgTrDat}{Wed 23 Apr - 17:05}{\textasciitilde/Downloads}{2.8}
+\twmhline 
+
+% --- ROW 2: FULL WIDTH TERMINAL ---
+\begin{twmwindow}[\textwidth]{user@cv-terminal:\textasciitilde}
+    \powerprompt{NgTrDat}{Wed 20 Aug - 17:05}{\textasciitilde}{1}
+    fastfetch -c \$HOME/.config/fastfetch/CV.jsonc
+
+    \vspace{10pt}
+
+    \begin{minipage}[t]{0.3\textwidth}
+        \vspace{0pt} 
+        % \includegraphics[height=13\baselineskip]{figure/HCMCUT.png}
+        \begin{tikzpicture}
+            \filldraw[fill=winborder, draw=cyan, rounded corners=5pt, thick] (0,0) rectangle (3.5, 3.5);
+            \node[text=textmain, font=\ttfamily\small, align=center] at (1.75, 1.75) {HCMCUT\\Logo};
+        \end{tikzpicture}
+    \end{minipage}%
+    \hspace{0.03\textwidth}%
+    \begin{minipage}[t]{0.65\textwidth}
+        \vspace{0pt}
+        \begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{promptblue}{NgTrDat@\textbf{cv-terminal}} 
+-----------------------------------
+\textcolor{promptgreen}{Name}       : Nguyễn Trọng Đạt
+\textcolor{promptgreen}{Age}        : 22
+\textcolor{promptgreen}{Role}       : Computer Engineering Student
+\textcolor{promptgreen}{Focus}      : AI Drones • Embedded Systems • Linux
+\textcolor{promptgreen}{GitHub}     : \href{https://github.com/LemonKronos}{github.com/LemonKronos}
+-----------------------------------
+        \end{Verbatim}
+    \end{minipage}
+\end{twmwindow}
 
 \end{document}
