@@ -1,25 +1,44 @@
-\documentclass{article}
+\documentclass[11pt, a4paper]{article}
 
 \usepackage{fontspec} % terminal fonts
 \setmainfont{FantasqueSansM Nerd Font Mono Bold}
 
 \usepackage[x11names]{xcolor} % page color
-
-\pagecolor[HTML]{0D1117}  % background color black
-\pagecolor[HTML]{262E41}  % background color blue
-\color[HTML]{C9D1D9}      % text color
-
-\usepackage[margin=1in]{geometry} % shell promt
-\usepackage{xcolor}
 \usepackage{tikz}
+\usepackage{fancyvrb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[most]{tcolorbox} % The magic package for TWM windows
+\usepackage{calc}            % For precise tiling math
+
+% Shrunk margins to give your windows more space!
+\usepackage[top=1cm, bottom=1cm, left=1cm, right=1cm]{geometry}
+
 \pagestyle{empty}
 
-% Define colors
+% Page background color
+\pagecolor[HTML]{F3FCF0}
+
+% Define Dark Theme Colors (Terminals)
+\definecolor{winbg}{HTML}{0D1117}
+\definecolor{winborder}{HTML}{3E4451} % Subtle color for the window frames
+\definecolor{textmain}{HTML}{C9D1D9}
+
+% Define Light Theme Colors (Notebooks & Image Viewers)
+\definecolor{notebg}{HTML}{FDFDFD}
+\definecolor{noteborder}{HTML}{D0D7DE}
+\definecolor{notetitle}{HTML}{F6F8FA}
+\definecolor{notetext}{HTML}{24292F}
+
+% Prompt Colors
 \definecolor{blue}{HTML}{003399}
 \definecolor{cyan}{HTML}{007C99}
 \definecolor{yellow}{HTML}{FFD001}
+\definecolor{promptblue}{RGB}{97,175,239}
+\definecolor{promptgreen}{RGB}{80,250,123}
 
-\newcommand{\powerprompt}[4]{% #1 = user, #2 = datetime, #3 = path, #4 = pathlengh
+% Your Powerprompt Macro
+\newcommand{\powerprompt}[4]{%
   \begin{tikzpicture}[baseline]
     \filldraw[fill=yellow, draw=none]
     (0,0) -- (2,0) -- (2.2,0.2) -- (2,0.4) -- (0,0.4) -- cycle;
@@ -37,47 +56,148 @@
   \end{tikzpicture}%
 }
 
-\usepackage{graphicx}
-\usepackage{float}
+% ==========================================
+% WINDOW MANAGER TEMPLATES
+% ==========================================
 
-\usepackage{fancyvrb}
-\usepackage{titlesec}
+% 1. Dark Terminal Window
+\DeclareTColorBox{twmwindow}{ O{\textwidth} m O{} }{
+    enhanced,
+    colback=winbg,
+    colframe=winborder,
+    colbacktitle=winborder,
+    coltitle=textmain,
+    coltext=textmain,
+    fonttitle=\bfseries,
+    arc=5pt, auto outer arc, boxrule=1pt,
+    title={#2},
+    left=8pt, right=8pt, top=8pt, bottom=8pt,
+    boxsep=0pt, toptitle=4pt, bottomtitle=4pt,
+    nobeforeafter,
+    width=#1, #3
+}
 
-\definecolor{promptblue}{RGB}{97,175,239}
-\definecolor{promptgreen}{RGB}{80,250,123}
+% 2. Chill Notebook (Light Theme + Red Lines)
+\DeclareTColorBox{twmnotebook}{ O{\textwidth} m O{} }{
+    enhanced,
+    colback=notebg,
+    colframe=noteborder,
+    colbacktitle=notetitle,
+    coltitle=notetext,
+    coltext=notetext,
+    fonttitle=\bfseries,
+    arc=5pt, auto outer arc, boxrule=1pt,
+    title={#2},
+    left=8pt, right=8pt, top=8pt, bottom=8pt,
+    boxsep=0pt, toptitle=4pt, bottomtitle=4pt,
+    nobeforeafter,
+    width=#1,
+    underlay={
+        \begin{tcbclipinterior}
+            % grid aligns with top padding (8pt) + the text baseline height (\ht\strutbox)
+            \draw[red!40, line width=0.5pt, ystep=\baselineskip, xstep=50cm, 
+                  shift={(interior.north west)}, 
+                  yshift=-8pt-\ht\strutbox]
+            (interior.south west) grid (interior.north east);
+        \end{tcbclipinterior}
+    },
+    #3
+}
+
+% 3. Image Viewer (Light Theme + No Padding)
+\DeclareTColorBox{twmimage}{ O{\textwidth} m O{} }{
+    enhanced,
+    colback=notebg,
+    colframe=noteborder,
+    colbacktitle=notetitle,
+    coltitle=notetext,
+    coltext=notetext,
+    fonttitle=\bfseries,
+    arc=5pt, auto outer arc, boxrule=1pt,
+    title={#2},
+    % Zero padding inside so the image hugs the frame perfectly
+    left=0pt, right=0pt, top=0pt, bottom=0pt,
+    boxsep=0pt, toptitle=4pt, bottomtitle=4pt,
+    nobeforeafter,
+    width=#1, #3
+}
+
+% Layout Macros for the 4px gaps
+\newcommand{\twmgap}{\hspace{4pt}}
+\newcommand{\twmhline}{\par\vspace{4pt}\noindent}
 
 % ###########################################################
 \begin{document}
 \raggedright
-\powerprompt{NgTrDat}{Wed 20 Aug - 17:05}{\textasciitilde}{1}
-fastfetch -c \$HOME/.config/fastfetch/CV.jsonc
 
-\begin{figure}[H]
-  \begin{minipage}[t]{0.3\textwidth}
-    \includegraphics[height=13\baselineskip]{figure/HCMCUT.png}
-  \end{minipage}%
-  \hspace{0.03\textwidth}
-  \begin{minipage}[t]{0.7\textwidth}
-    \vspace{-13\baselineskip}
-    \begin{Verbatim}[commandchars=\\\{\}]
-      \textcolor{promptblue}{NgTrDat@\textbf{cv-terminal}} 
-      -----------------------------------
-      \textcolor{promptgreen}{Name}       : Nguyễn Trọng Đạt
-      \textcolor{promptgreen}{Age}        : 22
-      \textcolor{promptgreen}{Role}       : Computer Engineering Student
-      \textcolor{promptgreen}{Focus}      : AI Drones • Embedded Systems • Linux
-      \textcolor{promptgreen}{Location}   : HCMC, Vietnam
-      \textcolor{promptgreen}{Email}      : trongdat4work@gmail.com
-      \textcolor{promptgreen}{GitHub}     : github.com/LemonKronos
-      \textcolor{promptgreen}{Languages}  : C/C++, Python, Rust, Verilog
-      \textcolor{promptgreen}{Tools}      : VSCode, Git, ROS2, PX4, Gazebo, STM32Cube
-      -----------------------------------
-      \end{Verbatim}
-  \end{minipage}
-\end{figure}
+% --- ROW 1: FULL WIDTH TERMINAL ---
+\begin{twmwindow}[\textwidth]{user@cv-terminal:\textasciitilde}
+    \powerprompt{NgTrDat}{Wed 20 Aug - 17:05}{\textasciitilde}{1}
+    fastfetch -c \$HOME/.config/fastfetch/CV.jsonc
 
-\powerprompt{NgTrDat}{Wed 20 Aug - 17:06}{\textasciitilde}{1}
-./script/myCV.sh "Company Name"
+    \vspace{10pt}
 
+    \begin{minipage}[t]{0.3\textwidth}
+        \vspace{0pt} 
+        \includegraphics[height=11\baselineskip]{figure/HCMCUT.png}
+    \end{minipage}%
+    \hspace{0.03\textwidth}%
+    \begin{minipage}[t]{0.65\textwidth}
+        \vspace{0pt}
+        \begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{promptblue}{NgTrDat@\textbf{cv-terminal}} 
+-----------------------------------
+\textcolor{promptgreen}{Name}       : Nguyễn Trọng Đạt
+\textcolor{promptgreen}{Age}        : 22
+\textcolor{promptgreen}{Role}       : Computer Engineering Student
+\textcolor{promptgreen}{Focus}      : AI Drones • Embedded Systems • Linux
+\textcolor{promptgreen}{Location}   : HCMC, Vietnam
+\textcolor{promptgreen}{Email}      : trongdat4work@gmail.com
+\textcolor{promptgreen}{GitHub}     : github.com/LemonKronos
+\textcolor{promptgreen}{Languages}  : C/C++, Python, Rust, Verilog
+\textcolor{promptgreen}{Tools}      : VSCode, Git, ROS2, PX4, Gazebo, STM32Cube
+-----------------------------------
+        \end{Verbatim}
+    \end{minipage}
 
+    \vspace{10pt}
+    \powerprompt{NgTrDat}{Wed 20 Aug - 17:06}{\textasciitilde}{1}
+    ./script/myCV.sh "Company Name"
+\end{twmwindow}
+
+\twmhline 
+
+% --- ROW 2: TILING WINDOWS (Split 50/50 with AUTO HEIGHT) ---
+\begin{twmwindow}[\dimexpr0.5\textwidth-2pt\relax]{Latent\_Diffusion\_Drone.md}[equal height group=row1]
+    \textcolor{promptgreen}{[Project]:} Acrobatic Obstacle Avoidance\\
+    \textcolor{promptblue}{Goal:} Uplifting model to run below human or AI path planning control.\\
+    \textcolor{promptblue}{Stack:} PX4, ROS2 Jazzy, Gazebo Harmonic.\\
+    Currently running locally. Preparing architecture for physical drone hardware.
+\end{twmwindow}%
+\twmgap 
+% Here's the new NOTEBOOK template!
+\begin{twmnotebook}[\dimexpr0.5\textwidth-2pt\relax]{Experience\_Edu.txt}[equal height group=row1]
+    [Edu]: HCMCUT\\
+    Major: Computer Engineering\\
+    Focus on embedded systems, Linux, and control algorithms.\\
+    Ready for robotics and firmware engineering roles.\\
+    Testing the notebook lines. Testing the notebook lines.\\
+    Testing the notebook lines. Testing the notebook lines.
+\end{twmnotebook}
+
+\twmhline 
+
+% --- ROW 3: IMAGE VIEWER + TERMINAL (Split 50/50 with AUTO HEIGHT) ---
+% Here's the new IMAGE VIEWER template! (Notice \linewidth makes the image fill it)
+\begin{twmimage}[\dimexpr0.5\textwidth-2pt\relax]{Drone\_Simulation\_Preview.png}[equal height group=row2]
+    \includegraphics[width=\linewidth]{figure/HCMCUT.png}
+\end{twmimage}%
+\twmgap
+\begin{twmwindow}[\dimexpr0.5\textwidth-2pt\relax]{btop}[equal height group=row2]
+    [CPU]  |||||||||||||||||||| 45\% \hfill [RAM]  ||||||||||||........ 8.2G/16.0G \\
+    {[DISK]} ||||||.............. 24\% \hfill [SWAP] .................... 0.0G/8.0G 
+\end{twmwindow}
+
+\newpage
+this is next page
 \end{document}
