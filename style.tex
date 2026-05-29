@@ -1,0 +1,166 @@
+
+\usepackage{fontspec} % terminal fonts
+\setmainfont{FantasqueSansM Nerd Font Mono Bold}
+
+\usepackage[x11names]{xcolor} % page color
+\usepackage{tikz}
+\usepackage{fancyvrb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[most]{tcolorbox} % The magic package for TWM windows
+\usepackage{calc}            % For precise tiling math
+\usepackage[hidelinks]{hyperref}
+\usepackage{tabularx}
+
+% Shrunk margins to give your windows more space!
+\usepackage[top=1cm, bottom=1cm, left=1cm, right=1cm]{geometry}
+
+\pagestyle{empty}
+
+% Page background color
+\pagecolor[HTML]{FFFFFF}
+
+\definecolor{border}{HTML}{028090}
+
+% Define Dark Theme Colors (Terminals)
+\definecolor{winbg}{HTML}{2D3142}
+\definecolor{winborder}{HTML}{4F5D75} % Subtle color for the window frames
+\definecolor{textmain}{HTML}{FFFFFF}
+
+% Define Light Theme Colors (Notebooks & Image Viewers)
+\definecolor{notebg}{HTML}{DFE0E0}
+\definecolor{noteline}{HTML}{BFC0C0}
+\definecolor{imageView}{HTML}{FFFFFF}
+\definecolor{noteborder}{HTML}{4F5D75}
+\definecolor{notetitle}{HTML}{FFFFFF}
+\definecolor{notetext}{HTML}{24292F}
+
+% IDE Theme (VS Code / OneDark vibe)
+\definecolor{idebg}{HTML}{1E1E1E}
+\definecolor{idefg}{HTML}{D4D4D4}
+\definecolor{idefgchill}{HTML}{c7d2db}
+\definecolor{idetitlebg}{HTML}{252526}
+\definecolor{idegutter}{HTML}{2D2D2D} 
+\definecolor{idegutterborder}{HTML}{404040}
+
+% Prompt Colors
+\definecolor{promptblue}{RGB}{97,175,239}
+\definecolor{promptgreen}{RGB}{80,250,123}
+\definecolor{promptred}{HTML}{FAA381}
+\definecolor{comment}{HTML}{60836F}
+
+% Other Colors
+\definecolor{blue}{HTML}{003399}
+\definecolor{cyan}{HTML}{007C99}
+\definecolor{yellow}{HTML}{FFD001}
+\definecolor{chillgreen}{HTML}{35AE69}
+\definecolor{link}{HTML}{42A340}
+
+% Your Powerprompt Macro
+\newcommand{\powerprompt}[4]{%
+  \begin{tikzpicture}[baseline]
+    \filldraw[fill=yellow, draw=none]
+    (0,0) -- (2,0) -- (2.2,0.2) -- (2,0.4) -- (0,0.4) -- cycle;
+    \node[text=black, anchor=center] at (1,0.18) {#1};
+  \end{tikzpicture}%
+  \begin{tikzpicture}[baseline]
+    \filldraw[fill=blue, draw=none]
+    (0,0) -- (4,0) -- (4.2,0.2) -- (4,0.4) -- (0,0.4) -- (0.2, 0.2) -- cycle;
+    \node[text=white, anchor=center] at (2,0.18) {#2};
+  \end{tikzpicture}%
+  \begin{tikzpicture}[baseline]
+    \filldraw[fill=cyan, draw=none]
+    (0,0) -- (#4,0) -- (#4 + 0.2,0.2) -- (#4,0.4) -- (0,0.4) -- (0.2,0.2) -- cycle;
+    \node[text=white, anchor=center] at (#4 / 2 + 0.1,0.18) {#3};
+  \end{tikzpicture}%
+}
+
+% ==========================================
+% WINDOW MANAGER TEMPLATES
+% ==========================================
+
+% 1. Dark Terminal Window
+\DeclareTColorBox{twmwindow}{ O{\textwidth} m O{} }{
+    enhanced,
+    colback=winbg,
+    colframe=winborder,
+    colbacktitle=winborder,
+    coltitle=textmain,
+    coltext=textmain,
+    fonttitle=\bfseries,
+    arc=5pt, auto outer arc, boxrule=1pt,
+    title={#2},
+    left=8pt, right=8pt, top=8pt, bottom=8pt,
+    boxsep=0pt, toptitle=4pt, bottomtitle=4pt,
+    nobeforeafter,
+    width=#1, #3
+}
+
+% 2. Chill Notebook
+\DeclareTColorBox{twmnotebook}{ O{\textwidth} m O{0pt} O{} }{
+    enhanced,
+    colback=notebg,
+    colframe=noteborder,
+    colbacktitle=notetitle,
+    coltitle=notetext,
+    coltext=notetext,
+    fonttitle=\bfseries,
+    arc=5pt, auto outer arc, boxrule=1pt,
+    title={#2},
+    left=8pt, right=8pt, top=8pt, bottom=8pt,
+    boxsep=0pt, toptitle=4pt, bottomtitle=4pt,
+    nobeforeafter,
+    width=#1,
+    halign=left,
+    before upper={\setlength{\parindent}{#3} \hyphenpenalty=10000 \exhyphenpenalty=10000}, 
+    underlay={
+        \begin{tcbclipinterior}
+            \draw[noteline, line width=0.5pt, ystep=\baselineskip, xstep=50cm, shift={(interior.north west)}, yshift=-8pt-\ht\strutbox]
+            (interior.south west) grid ([yshift=-8pt-\ht\strutbox]interior.north east);
+        \end{tcbclipinterior}
+    }, #4
+}
+
+% 3. Image Viewer
+\DeclareTColorBox{twmimage}{ O{\textwidth} m O{} }{
+    enhanced,
+    colback=notebg,
+    colframe=noteborder,
+    colbacktitle=notetitle,
+    coltitle=notetext,
+    coltext=notetext,
+    fonttitle=\bfseries,
+    arc=5pt, auto outer arc, boxrule=1pt,
+    title={#2},
+    % Zero padding inside so the image hugs the frame perfectly
+    left=0pt, right=0pt, top=0pt, bottom=0pt,
+    lefttitle=8pt, righttitle=8pt,
+    boxsep=0pt, toptitle=4pt, bottomtitle=4pt,
+    nobeforeafter,
+    width=#1,
+    clip upper,
+    #3
+}
+
+% 4. IDE Code Snippet Window
+\DeclareTColorBox{twmide}{ O{\textwidth} m O{} }{
+    enhanced, colback=idebg, colframe=winborder, colbacktitle=idetitlebg,
+    coltitle=idefg, coltext=idefg, fonttitle=\bfseries,
+    arc=5pt, auto outer arc, boxrule=1pt, title={#2},
+    left=28pt, right=8pt, top=8pt, bottom=0pt, lefttitle=8pt, % extra left padding for the gutter!
+    boxsep=0pt, toptitle=4pt, bottomtitle=4pt,
+    nobeforeafter, width=#1,
+    underlay={
+        \begin{tcbclipinterior}
+            % Draw the gutter
+            \fill[idegutter] (interior.south west) rectangle ([xshift=24pt]interior.north west);
+            % Gutter separator line
+            \draw[idegutterborder, line width=0.5pt] ([xshift=24pt]interior.south west) -- ([xshift=24pt]interior.north west);
+        \end{tcbclipinterior}
+    }, #3
+}
+
+% Layout Macros for the 4px gaps
+\newcommand{\twmgap}{\hspace{4pt}}
+\newcommand{\twmhline}{\par\vspace{4pt}\noindent}
+\newcommand{\cvrow}[2]{\noindent\begin{tabularx}{\linewidth}{@{} l X @{}} #1 & #2 \end{tabularx}\par\vspace{-0.1ex}}
