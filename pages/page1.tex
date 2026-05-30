@@ -1,5 +1,5 @@
 
-\begin{twmwindow}[\textwidth]{user@cv-terminal: ShowMyCV.sh "Company Name"} % # REMEMBER TO CHANGE THIS PLEASE
+\begin{twmwindow}[\textwidth]{user@cv-terminal:\textasciitilde}
     \powerprompt{NgTrDat}{Wed 8 Apr - 17:05}{\textasciitilde}{1}
     fastfetch -c \$HOME/.config/fastfetch/CV.jsonc
 
@@ -21,11 +21,11 @@
 \textcolor{promptgreen}{Name}       : \textbf{Nguyễn Trọng Đạt}
 \textcolor{promptgreen}{Age}        : \textbf{22}
 \textcolor{promptgreen}{Role}       : \textbf{Computer Engineering Intern}
+\textcolor{promptgreen}{Study}      : \textbf{Ho Chi Minh University of Technology}
 \textcolor{promptgreen}{Focus}      : \textbf{Embedded Systems • Robotic • AI • Drone}
-\textcolor{promptgreen}{Location}   : \textbf{HCMC, Vietnam}
+\textcolor{promptgreen}{Location}   : \textbf{Ho Chi Minh City, Vietnam}
 \textcolor{promptgreen}{Email}      : \href{mailto:trongdat4work@gmail.com}{\textcolor{link}{trongdat4work@gmail.com}}
-\textcolor{promptgreen}{GitHub}     : \href{https://github.com/LemonKronos}{\textcolor{link}{https://github.com/LemonKronos}}
-\textcolor{promptgreen}{Languages}  : \textbf{C/C++, Shell script, Python}
+\textcolor{promptgreen}{Languages}  : \textbf{C/C++, Python, Shell script}
 \textcolor{promptgreen}{Tools}      : \textbf{VSCode, Git, ROS2, Gazebo}
 \textcolor{promptgreen}{English}    : \textbf{TOEIC L&R \textcolor{promptgreen}{970}/990}
 ------------------------------------------------------
@@ -40,12 +40,13 @@
 
 \twmhline 
 
-\begin{twmnotebook}[\dimexpr 0.5\textwidth-2pt\relax]{Professional\_Objective.txt}[15pt][equal height group=row2]
-Computer Engineering student specializing in high-performance robotics and system architecture. Focused on bridging low-level hardware control loops with high-level generative AI planning models to build autonomous, real-time systems.\\
-Experienced in collaborative environments using Git; proficiency in reading, understanding, and safely contributing to shared codebases.
+\begin{twmnotebook}[\dimexpr 0.6\textwidth-2pt\relax]{Professional\_objective.txt}[15pt][equal height group=row2]
+\textbullet Computer Engineering student focused on robotics, embedded systems, and autonomous drone software. \textcolor{chillblue}{Experienced with ROS2, PX4, Gazebo, and C++ development} for real-time systems and simulation environments.\\
+\textbullet Experienced in collaborative environments using Git; proficiency in reading, understanding, and safely contributing to shared codebases.\\
+\textbullet Wish to transition into a full-time engineering role after the internship.
 \end{twmnotebook}%
 \twmgap
-\begin{twmimage}[\dimexpr 0.5\textwidth-2pt\relax]{Drone\_Simulation\_Preview.png}[equal height group=row2]
+\begin{twmimage}[\dimexpr 0.4\textwidth-2pt\relax]{Drone\_Simulation\_Preview.png}[equal height group=row2]
     \includegraphics[width=\linewidth]{figure/DemoDrone.png}
 \end{twmimage}
 
@@ -54,23 +55,23 @@ Experienced in collaborative environments using Git; proficiency in reading, und
 \begin{twmnotebook}[\dimexpr \textwidth-2pt\relax]{Education.log}[0pt]
     \cvrow{{[Study]}}{Ho Chi Minh University of Technology (BKU)}
     \cvrow{{[Major]}}{Bachelor of Computer Engineering (Expected graduation 2027)}
-    \cvrow{{[current GPA]}}{2.5/4.0 \hyperlink{note1}{\textcolor{link}{*}}} %# what to put here, that like a log say this is not all there is
+    \cvrow{{[current GPA]}}{2.5/4.0 \hyperlink{GPA}{\textcolor{link}{*}}} %# what to put here, that like a log say this is not all there is
     \cvrow{{[Core Coursework]}}{
         \textbullet \quad Embedded System \qquad \textbullet \quad Operating System \qquad \textbullet \quad Machine Learning\newline
         \textbullet \quad Microprocessors-Microcontrollers \newline
         \textbullet \quad IoT-Oriented Logic Design Project \newline
         \textbullet \quad AI-Oriented Multidisciplinary Projects
     }
-    \cvrow{{[Passion Project]}}{Latent Imitation Planning for Hardware-Agnostic Acrobatic Flight\hyperlink{note1}{\textcolor{link}{**}}}
+    \cvrow{{[Passion Project]}}{\textcolor{chillblue}{Built a ROS2 + PX4 drone simulation pipeline in Gazebo for acrobatic trajectory imitation learning}\hyperlink{drone}{\textcolor{link}{**}}}
 \end{twmnotebook}
 
 \twmhline
 
-\begin{twmimage}[\dimexpr 0.35\textwidth-2pt\relax]{Toolchain.png}[equal height group=row4, valign=center, halign=center]
-    \includegraphics[width=0.9\textwidth]{figure/toolchain.png}
+\begin{twmimage}[\dimexpr 0.3\textwidth-2pt\relax]{Toolchain.png}[equal height group=row4, valign=center, halign=center]
+    \includegraphics[width=0.85\textwidth]{figure/toolchain.png}
 \end{twmimage}%
 \twmgap
-\begin{twmide}[\dimexpr 0.65\textwidth-2pt\relax]{Skills.md}[equal height group=row4, colback=idebg, coltext=idefgchill]
+\begin{twmide}[\dimexpr 0.7\textwidth-2pt\relax]{Skills.md}[equal height group=row4, colback=idebg, coltext=idefgchill]
     \begin{Verbatim}[commandchars=\\\{\}, numbers=left, numbersep=12pt, formatcom=\color{idefg}]
 \textcolor{chillgreen}{\textbf{Programming:}}
   \textcolor{chillgreen}{\textbullet} Most proficient with \textcolor{promptblue}{C++} and \textcolor{promptblue}{Python}
@@ -79,9 +80,24 @@ Experienced in collaborative environments using Git; proficiency in reading, und
   \textcolor{chillgreen}{\textbullet} \textcolor{promptblue}{ROS2 (Jazzy)} \quad \textcolor{chillgreen}{\textbullet} \textcolor{promptblue}{Gazebo Harmonic}
   \textcolor{chillgreen}{\textbullet} PX4 Autopilot \quad \textcolor{chillgreen}{\textbullet} MicroXRCE-DDS
 \textcolor{chillgreen}{AI, Machine Learning \& Data Engineering:}
-  \textcolor{chillgreen}{\textbullet} \textcolor{promptblue}{PyTorch} \quad \textcolor{chillgreen}{\textbullet} Robotic data processing
-  \textcolor{chillgreen}{\textbullet} Latent Diffusion Learning \quad \textcolor{chillgreen}{\textbullet} Embedded vectors
+  \textcolor{chillgreen}{\textbullet} \textcolor{promptblue}{PyTorch} \quad \textcolor{chillgreen}{\textbullet} Robotic data processing \quad \textcolor{chillgreen}{\textbullet} Computer Vision
+  \textcolor{chillgreen}{\textbullet} Latent Diffusion Learning \quad \textcolor{chillgreen}{\textbullet} AI Edge Computing
 \textcolor{chillgreen}{Development tools:} \textcolor{chillgreen}{\textbullet} VScode \quad \textcolor{chillgreen}{\textbullet} \textcolor{promptblue}{Git} \quad \textcolor{chillgreen}{\textbullet} \textcolor{promptblue}{Linux OS}
-\textcolor{chillgreen}{Language:} \textcolor{chillgreen}{\textbullet} \textcolor{promptblue}{TOEIC 970}/990 (Listening & Reading)
     \end{Verbatim}
 \end{twmide}
+
+\twmhline
+
+\begin{twmnotebook}[\dimexpr 0.5\textwidth-2pt\relax]{Contacts.txt}[0pt][equal height group=row5]
+{\Large } \quad Phone : (+84) 399922395\\
+{\Large } \quad Email : \href{mailto:trongdat4work@gmail.com}{\textcolor{link}{trongdat4work@gmail.com}}\\
+{\Large } \quad Github: \href{https://github.com/LemonKronos}{\textcolor{link}{github.com/LemonKronos}}\\
+{\Large } \quad LinkIn: \href{https://www.linkedin.com/in/tr%E1%BB%8Dng-%C4%91%E1%BA%A1t/}{\textcolor{link}{www.linkedin.com/in/trong-dat}}
+\end{twmnotebook}%
+\twmgap%
+\begin{twmnotebook}[\dimexpr 0.5\textwidth-2pt\relax]{About\_me.txt}[0pt][equal height group=row5]
+\textbullet \quad Dream to be a Robotic engineer, working on drone\\
+\textbullet \quad "I need a money, I must find jobs, pls"\\
+\textbullet \quad Open-source mind set, a part of Linux community\\
+\textbullet \quad Hopefully my project could make up for my GPA
+\end{twmnotebook}

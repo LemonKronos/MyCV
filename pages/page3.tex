@@ -1,0 +1,98 @@
+
+\begin{twmwindow}[\dimexpr \textwidth-2pt\relax]{Development Workflow \& Technical Toolchain}[]
+    Core Toolchain \& Environments:\\
+    - Operating system: Linux, customized
+    - Version control: git
+    - Dev tools: VScode + shell script + build system
+    Programming paradigms:\\
+    - System langs: C/C++: legacy and modern, focus on optimization, low-latency/non-blocking control
+    - High langs: Python is the main focus, for AI and data analysis.
+    - Other langs: have done some small web dev, java, rust, go, zig
+    - Emerging langs: Rust - the modern of safe, low system langs
+\end{twmwindow}
+
+\twmhline
+
+\begin{twmide}[\dimexpr \textwidth-2pt\relax]{Education.md}[equal height group=row1, colback=idebg, coltext=idefg]
+    \begin{Verbatim}[commandchars=\\\{\}, numbers=left, numbersep=12pt, formatcom=\color{idefg}]
+\textcolor{promptblue}{Ho Chi Minh University of Technology (BKU)} 
+\textcolor{promptblue}{Bachelor of Computer Engineering (Expected 2027)}
+\textcolor{promptred}{\hypertarget{note1}{this is the example explain}GPA: 2.5/4.0}
+\textcolor{promptblue}{Core Coursework:}
+    \textcolor{promptblue}{\textbullet Robotics                        \textbullet AI-Oriented Multidisciplinary Projects}
+    \textcolor{promptblue}{\textbullet Data Structures & Algorithms    \textbullet LSI Logic Design}
+    \end{Verbatim}
+\end{twmide}
+
+\twmhline
+
+% --- ROW 1: IDE AND TREE (Split 50/50 with AUTO HEIGHT) ---
+\begin{twmide}[\dimexpr \textwidth-2pt\relax]{planner.cpp}[equal height group=row1, colback=idebg, coltext=idefg]
+    % By adding numbers=left and numbersep=12pt, the numbers perfectly hit the TikZ gutter!
+    \begin{Verbatim}[commandchars=\\\{\}, numbers=left, numbersep=12pt, formatcom=\color{idefg}]
+\textcolor{promptblue}{void} LDP_Planner::calculate_trajectory() \{
+    \textcolor{promptgreen}{// Init latent diffusion model}
+    \textcolor{promptblue}{auto} model = init_diffusion();
+    
+    \textcolor{promptblue}{if} (obstacle_detected) \{
+        \textcolor{promptblue}{return} reactive_avoidance();
+    \}
+    
+    \textcolor{promptblue}{return} model.step();
+\}
+    \end{Verbatim}
+\end{twmide}
+
+\twmhline 
+
+% --- ROW 2: TILING WINDOWS (Split 50/50 with AUTO HEIGHT) ---
+\begin{twmwindow}[\dimexpr0.5\textwidth-2pt\relax]{Latent\_Diffusion\_Drone.md}[equal height group=row1]
+    \textcolor{promptgreen}{[Project]:} Acrobatic Obstacle Avoidance\\
+    \textcolor{promptblue}{Goal:} Uplifting model to run below human or AI path planning control.\\
+    \textcolor{promptblue}{Stack:} PX4, ROS2 Jazzy, Gazebo Harmonic.\\
+    Currently running locally. Preparing architecture for physical drone hardware.
+\end{twmwindow}%
+\twmgap 
+\begin{twmnotebook}[\dimexpr0.5\textwidth-2pt\relax]{Experience\_Edu.txt}[0pt][equal height group=row1]
+    Major: Computer Engineering\\
+    Focus on embedded systems, Linux, and control algorithms.\\
+    Ready for robotics and firmware engineering roles.\\
+    Testing the notebook lines. Testing the notebook lines.\\
+    Testing the notebook lines. Testing the notebook lines.\\
+\end{twmnotebook}
+
+\twmhline 
+
+\begin{twmwindow}[\dimexpr \textwidth-2pt\relax]{btop}[]
+    [CPU]  |||||||||||||||||||| 45\% \hfill [RAM]  ||||||||||||........ 8.2G/16.0G \\
+    {[DISK]} ||||||.............. 24\% \hfill [SWAP] .................... 0.0G/8.0G 
+\end{twmwindow}
+
+\twmhline
+
+% --- ROW 3: IMAGE VIEWER + TERMINAL with manual height ---
+\begin{twmimage}[\dimexpr 0.5\textwidth-2pt\relax]{Drone\_Simulation\_Preview.png}[equal height group=row7, valign=center, halign=center]
+    \includegraphics[height=120pt]{figure/HCMCUT.png}
+\end{twmimage}%
+\twmgap
+\begin{twmide}[\dimexpr 0.5\textwidth-2pt\relax]{planner.cpp}[equal height group=row7]
+    \begin{Verbatim}[commandchars=\\\{\}, numbers=left, numbersep=12pt, formatcom=\color{idefg}]
+\textcolor{promptblue}{void} LDP_Planner::calculate_traj() \{
+    \textcolor{promptblue}{auto} model = init_diffusion();
+    \textcolor{promptblue}{if} (obstacle_detected) \{
+        \textcolor{promptblue}{return} reactive_avoidance();
+    \}
+
+    \textcolor{promptblue}{return} model.step();
+\}
+
+\textcolor{promptblue}{void} LDP_Planner::calculate_traj() \{
+    \textcolor{promptblue}{auto} model = init_diffusion();
+    \textcolor{promptblue}{if} (obstacle_detected) \{
+        \textcolor{promptblue}{return} reactive_avoidance();
+    \}
+
+    \textcolor{promptblue}{return} model.step();
+\}
+    \end{Verbatim}
+\end{twmide}
