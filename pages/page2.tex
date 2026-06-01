@@ -1,76 +1,71 @@
 
 \noindent
+
 \begin{minipage}{\dimexpr 0.5\textwidth-2pt\relax}
-    \begin{twmnotebook}[\linewidth]{Project\_Acrobatic\_Drone.txt}[0pt][height=350pt]
-        \textcolor{chillblue}{Project: Full Pipeline Acrobatic Drone base on Latent Imitation Learning}\\
-        drone ai stuff
+    \begin{twmnotebook}[\linewidth]{Project\_Acrobatic\_Drone.md \hypertarget{drone}{}}[0pt][height=325pt]
+\textcolor{chillblue}{Project: Full Pipeline Acrobatic Drone base on Latent Imitation Learning}\\
+\textbullet \quad \textcolor{chillgreen}{Latent Imitation Learning:} Train AI trying to mimic professional's action, but by using latent space and grading, giving AI the chances to evol pass pro's input, beyond what human are able to do.\\
+\textbullet \quad \textcolor{chillgreen}{Goals:} framework designed to act as an "AI Co-pilot," denoising erratic, suboptimal human inputs into safe, expert-level 3D trajectories.\\
+\textbullet \quad \textcolor{chillgreen}{Main components:} From bottom up, use Gazebo Harmonic as the simulation and physic engine. PX4 Autopilot to control drone high frequency inner loop. MicroXRCE-DDS to bridge between PX4 and ROS2. ROS2 as the main offboard operating system, handle the sensors and communication. That let the acrobatic AI, which is a python ROS2 node run on the system, at a lower frequency.\\
+\textbullet \quad \textcolor{chillgreen}{Priciple:} The input is raw humman control (or higher AI control later), telementry data (inner sensors), environment data (vision, 3D scans). Acrobatic AI generate a imagine trajectory to manuever through the obstacles, like a pro, is the expected output. That will get filter through math-base avoidant algorithm before it reach the PX4, which realize the control to motors output.
     \end{twmnotebook}
+    \twmhline
+    \begin{twmimage}[\dimexpr 0.7\linewidth-2pt\relax]{Test\_Control\_World.png}[height=\dimexpr 125pt - 2pt\relax, valign=center, halign=center]
+        \includegraphics[width=\linewidth, height=\tcbtextheight, keepaspectratio]{figure/test_control_world.png}
+    \end{twmimage}%
+    \twmgap%
+    \begin{twmimage}[\dimexpr 0.3\linewidth-2pt\relax]{Pipeline.png}[height=\dimexpr 125pt - 2pt\relax, valign=center, halign=center]
+        \includegraphics[width=\linewidth, height=\tcbtextheight, keepaspectratio]{figure/OverviewPipeline.png}
+    \end{twmimage}
 \end{minipage}%
 \twmgap%
 \begin{minipage}{\dimexpr 0.5\textwidth-2pt\relax}
-    \begin{twmimage}[\linewidth]{Test\_non-AI\_behavior.png}[height=\dimexpr 175pt - 2pt\relax, valign=center, halign=center]
+    \begin{twmimage}[\dimexpr 0.7\linewidth-2pt\relax]{Test\_non-AI\_behavior.png}[height=\dimexpr 125pt - 2pt\relax, valign=center, halign=center]
         \includegraphics[width=\linewidth, height=\tcbtextheight, keepaspectratio]{figure/DemoDrone2.png}
-    \end{twmimage}
+    \end{twmimage}%
+    \twmgap%
+    \begin{twmnotebook}[\dimexpr  0.3\linewidth-2pt\relax]{AI\_train.md}[0pt][height=\dimexpr 125pt - 2pt\relax]
+        Layer: 12\\
+        Total params:88.5M\\
+        Estimated size: 354MB\\
+        MSE: 0.076\\
+        Correlation: -0.02
+    \end{twmnotebook}
     \twmhline
-    \begin{twmide}[\linewidth]{AI\_Brain.py}[height=\dimexpr 175pt - 2pt\relax]
-        \begin{Verbatim}[commandchars=\\\{\}, numbers=left, numbersep=12pt, formatcom=\color{idefg}]
-python code comment here
-        \end{Verbatim}
-    \end{twmide}
+    \begin{twmnotebook}[\linewidth]{Project\_Acrobatic\_Drone.md}[0pt][height=\dimexpr 325pt - 2pt\relax]
+\textbullet \quad \textcolor{chillgreen}{Execution:} Pre-record pro control input and other data in Gazebo to build the dataset. The Gazebo world in which records is a procuedural generative obstacles tunnel world. AI then get trained offline on that dataset. After that, run offline test and online (realtime) test when user control is put in and receive drone moverment acrodingly.\\
+\textbullet \quad \textcolor{chillgreen}{Results:} The control pipeline non-AI work as intended, with the correct low-level obstacle avoidant ouput (up to 1km autonomous fly non-crash). But when run with AI brain, it show noisy ouput and even fight back user control, lead to weird behaviour.\\
+\textbullet \quad \textcolor{chillgreen}{Diagnosed:} Initial model outputs identifying short-sighted design in dataset and data flow between high and low layer. In need of a better model, trained on larger dataset.\\
+\textbullet \quad \textcolor{chillgreen}{Future:}Currently executing a drastic pipeline overhaul, focusing on low-level data computing and improved handling structures to achieve dynamic acrobatic responses.\\
+\textbullet \quad \textcolor{chillgreen}{Summarize:} The project show that the pipeline is possible. However, the structure on both AI and Robotic side need to be more refined.
+    \end{twmnotebook}
 \end{minipage}
 
 \twmhline
 
-\begin{twmimage}[\dimexpr 0.3\textwidth-2pt\relax]{Rice.png}[height=110pt, valign=center, halign=center]
+\begin{twmnotebook}[\dimexpr 0.7\textwidth-2pt\relax]{Edge\_AI\_Greenhouse\_Project.md}[0pt][height=110pt]
+    \textcolor{chillgreen}{Goals:} Train a regression model to predict the correct irrigation amount for a greenhouse, then quantize it into an edge IoT device.\\
+    \textcolor{chillgreen}{Principle:} In Python, build a LightGBM regression model on the dataset, prune unimportant features. After that use TL2cgen lib to convert the model trees to C code, which then get compiled to binary and run directly on ESP32 chip. On the Embedded side, EPS32 handle sensor filtering and formating, communication, safe guards and sleep-scheduling.\\
+\end{twmnotebook}%
+\twmgap%
+\begin{twmimage}[\dimexpr 0.3\textwidth-2pt\relax]{Irrigation\_Comparison.png}[height=110pt, valign=center, halign=center]
     \includegraphics[width=\linewidth, height=\tcbtextheight, keepaspectratio]{figure/first_100_samples.png}
-\end{twmimage}%
-\twmgap%
-\begin{twmnotebook}[\dimexpr 0.7\textwidth-2pt\relax]{Computer\_Engineering\_course\_projects.txt}[0pt][height=110pt]
-Project: Edge AI Green house\\
-Course: Machine Learning \& Microprocessors-Microcontrollers\\
-We did Edge AI\\
-1\\
-2\\
-3\\
-4\\
-\end{twmnotebook}
-
-\twmhline
-
-\begin{twmimage}[\dimexpr 0.3\textwidth-2pt\relax]{Rice.png}[height=110pt, valign=center, halign=center]
-    \includegraphics[width=\linewidth, height=\tcbtextheight, keepaspectratio]{figure/blockdiagaram.png}
-\end{twmimage}%
-\twmgap%
-\begin{twmnotebook}[\dimexpr 0.7\textwidth-2pt\relax]{Computer\_Engineering\_course\_projects.txt}[0pt][height=110pt]
-Project:Simple IoT\\
-Course: IoT-Oriented Logic Design Project\\
-We did Simple IoT\\
-\end{twmnotebook}
-
-\twmhline
-
-\begin{twmwindow}[\dimexpr0.7\textwidth-2pt\relax]{user@cv-terminal:ccat Linux\_customization\_\&\_contribution.md}[height=110pt]
-    \begin{Verbatim}[commandchars=\\\{\}]
-[Yooooooooo]
-[Rice]
-1\\
-2\\
-3\\
-4\\
-5\\
-    \end{Verbatim}
-\end{twmwindow}%
-\twmgap%
-\begin{twmimage}[\dimexpr 0.3\textwidth-2pt\relax]{Desktop "Rice".png}[height=110pt, valign=center, halign=center]
-    \includegraphics[width=\linewidth, height=\tcbtextheight, keepaspectratio]{figure/rice2.png}
 \end{twmimage}
 
 \twmhline
 
-\begin{twmnotebook}[\dimexpr \textwidth-2pt\relax]{GPA\_Analysis.txt}[0pt][]
-    Testing the notebook lines. Testing the notebook lines.\\
-    Testing the notebook lines. Testing the notebook lines.\\
-    Testing the notebook lines. Testing the notebook lines.\\
-    Testing the notebook lines. Testing the notebook lines.\\
-\end{twmnotebook}
+\begin{twmnotebook}[\dimexpr 0.7\textwidth-2pt\relax]{Simple\_IoT\_Projects.md}[0pt][height=110pt]
+    \textcolor{chillgreen}{Goals:} Handle combine sensors using STM32, then evaluate, show sensors data using LCD, LEDs indicator and send data to web server via ESP32 wifi module.\\
+    \textcolor{chillgreen}{Execution:} Read datasheets and write driver for sensors, LCD, LEDs. Communication handling with I2C for sensors-STM32 and UART for STM32-ESP32. Set up RTOS scheduler on STM32. Sending and setting web server using Next.js.\\
+\end{twmnotebook}%
+\twmgap%
+\begin{twmimage}[\dimexpr 0.3\textwidth-2pt\relax]{IoT\_Diagram.png}[height=110pt, valign=center, halign=center]
+    \includegraphics[width=\linewidth, height=\tcbtextheight, keepaspectratio]{figure/blockdiagaram.png}
+\end{twmimage}
 
+\twmhline
+
+\begin{twmnotebook}[\dimexpr \textwidth-2pt\relax]{Academic\_vs\_Practical\_Metrics.log \hypertarget{GPA}{}}[0pt][]
+\textbullet \quad \textcolor{chillblue}{The Reality:} My GPA is 2.5/4.0. While I did not master every single classroom theory at university, I belived that I can spend time researching and building an actual working systems.\\
+\textbullet \quad \textcolor{chillblue}{The Validation:} Classroom scores measure test retention, but engineering requires execution. The functional code pipelines documented above prove my readiness to contribute to real-world development. All the projects are avaiable on my Github, and I can perform live demonstation if needed.
+\end{twmnotebook}
