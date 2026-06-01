@@ -3,11 +3,11 @@
 
 \begin{minipage}{\dimexpr 0.5\textwidth-2pt\relax}
     \begin{twmnotebook}[\linewidth]{Project\_Acrobatic\_Drone.md}[0pt][height=325pt]
-\textcolor{chillblue}{Project: Full-Pipeline Acrobatic Drone base on Latent Imitation Learning}\\
+\textcolor{chillblue}{Project: Full-Pipeline Acrobatic Drone based on Latent Imitation Learning}\\
 \textbullet \quad \textcolor{chillgreen}{Latent Imitation Learning:} Trains an AI model to imitate expert pilot behavior using latent space representations and performance-based evaluation, enabling policies that can potentially surpass the original demonstrations.\\
 \textbullet \quad \textcolor{chillgreen}{Goal:} framework designed to act as an "AI Co-pilot," denoising erratic, suboptimal human inputs into safe, expert-level 3D trajectories.\\
 \textbullet \quad \textcolor{chillgreen}{Main components:} Gazebo Harmonic for simulation and physics, PX4 Autopilot for high-frequency flight control, Micro XRCE-DDS for PX4-ROS2 communication, and ROS2 as the offboard middleware handling sensors, messaging, and AI integration. The acrobatic AI runs as a Python ROS2 node at a lower control frequency. \hypertarget{drone}{}\\
-\textbullet \quad \textcolor{chillgreen}{Priciple:} Inputs include raw human control commands, telemetry data, and environmental perception data (vision and 3D sensing). The AI generates an intended trajectory through the environment, which is validated by a safety and obstacle-avoidance layer before being executed by PX4 and translated into motor commands.
+\textbullet \quad \textcolor{chillgreen}{Principle:} Inputs include raw human control commands, telemetry data, and environmental perception data (vision and 3D sensing). The AI generates an intended trajectory through the environment, which is validated by a safety and obstacle-avoidance layer before being executed by PX4 and translated into motor commands.
     \end{twmnotebook}
     \twmhline
     \begin{twmimage}[\dimexpr 0.7\linewidth-2pt\relax]{Test\_Control\_World.png}[height=\dimexpr 125pt - 2pt\relax, valign=center, halign=center]
@@ -35,7 +35,7 @@
     \begin{twmnotebook}[\linewidth]{Project\_Acrobatic\_Drone.md}[0pt][height=\dimexpr 325pt - 2pt\relax]
 \textbullet \quad \textcolor{chillgreen}{Execution:} Collected expert control inputs and telemetry data in Gazebo to build a training dataset. The simulation environment consisted of a procedurally generated obstacle-tunnel world. Models were trained offline and evaluated through both offline testing and real-time user-controlled flight scenarios.\\
 \textbullet \quad \textcolor{chillgreen}{Results:} Successfully validated the non-AI control pipeline, including low-level obstacle avoidance, achieving autonomous flights of up to 1 km without collisions. However, the AI-controlled system produced noisy outputs and occasionally conflicted with user inputs, resulting in unstable flight behavior.\\
-\textbullet \quad \textcolor{chillgreen}{Diagnosed:} Early model outputs revealed limitations in the design and data flow between high and low layers, indicated the need for a improved model and larger training datasets.\\
+\textbullet \quad \textcolor{chillgreen}{Diagnosed:} Early model outputs revealed limitations in the design and data flow between high and low layers, indicated the need for an improved model and larger training datasets.\\
 \textbullet \quad \textcolor{chillgreen}{Future:} Currently redesigning the pipeline with a focus on low-level data processing, system integration, and control structures to support more dynamic acrobatic maneuvers.\\
 \textbullet \quad \textcolor{chillgreen}{Summarize:} Demonstrated the feasibility of the overall control pipeline. Further refinement of both the AI and robotics architectures is needed.
     \end{twmnotebook}
@@ -45,7 +45,7 @@
 
 \begin{twmnotebook}[\dimexpr 0.7\textwidth-2pt\relax]{Edge\_AI\_Greenhouse\_Project.md}[0pt][height=110pt]
     \textcolor{chillgreen}{Goal:} Train a regression model to predict the correct irrigation amount for a greenhouse, and deploy it on an edge IoT device.\\
-    \textcolor{chillgreen}{Principle:} In Python, build a LightGBM regression model on the dataset, prune unimportant features. After that use TL2cgen lib to convert the model to C code, which is then get compiled to binary and run directly on an ESP32. On the Embedded side, ESP32 handle sensor filtering and formating, communication, safeguards and sleep scheduling.\\
+    \textcolor{chillgreen}{Principle:} In Python, build a LightGBM regression model on the dataset, prune unimportant features. After that, using TL2cgen libabry, convert the model into C code, then compile it to binary and run directly on an ESP32. On the Embedded side, ESP32 handles sensor filtering and formating, communication, safeguards and sleep scheduling.\\
 \end{twmnotebook}%
 \twmgap%
 \begin{twmimage}[\dimexpr 0.3\textwidth-2pt\relax]{Irrigation\_Comparison.png}[height=110pt, valign=center, halign=center]
@@ -55,8 +55,8 @@
 \twmhline
 
 \begin{twmnotebook}[\dimexpr 0.7\textwidth-2pt\relax]{Simple\_IoT\_Projects.md}[0pt][height=110pt]
-    \textcolor{chillgreen}{Goals:} Integrate multiple sensors using STM32, then evaluate, display sensors data using LCD, LEDs indicator and send data to web server via ESP32 wifi module.\\
-    \textcolor{chillgreen}{Execution:} Read datasheets and write driver for sensors, LCD, LEDs. Implemented communication with I2C for sensors-STM32 and UART for STM32 and ESP32. Set up RTOS scheduler on STM32. Developed and deployed a web server using Next.js\\
+    \textcolor{chillgreen}{Goals:} Integrate multiple sensors using STM32, then evaluate and display sensor data using LCD, LEDs indicator and send data to web server via ESP32 wifi module.\\
+    \textcolor{chillgreen}{Execution:} Read datasheets and developed driver for sensors, LCD, LEDs. Implemented I2C communication between sensors and STM32, and UART communication between STM32 and ESP32. Set up RTOS scheduler on STM32. Developed and deployed a web server using Next.js\\
 \end{twmnotebook}%
 \twmgap%
 \begin{twmimage}[\dimexpr 0.3\textwidth-2pt\relax]{IoT\_Diagram.png}[height=110pt, valign=center, halign=center]
