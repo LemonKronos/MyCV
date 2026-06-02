@@ -9,7 +9,6 @@ Computer Engineering student with a strong focus on AI and Robotics
 * **Tools:** Linux, Git, VS Code
 
 ---
+*Click the image below to view or download the full PDF.*
 
 [![CV Preview](./cv-preview.png)](./build/main.pdf)
-
-*Click the image above to view or download the full PDF.*
