@@ -1,9 +1,15 @@
 # Nguyễn Trọng Đạt - Curriculum Vitae
 
-If the PDF does not load automatically, you can [download the CV PDF directly](./build/main.pdf).
+Computer Engineering student with a strong focus on AI and Robotics
 
-<object data="./build/main.pdf" type="application/pdf" width="100%" height="800px">
-    <iframe src="./build/main.pdf" width="100%" height="800px">
-        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="./build/main.pdf">Download PDF</a>.</p>
-     iframe>
-</object>
+### Core Stack
+* **Languages:** C++, Python, Shell script
+* **Robotics & Simulation:** ROS2, Gazebo, PX4 Autopilot
+* **AI & Data:** Latent Diffusion Models
+* **Tools:** Linux, Git, VS Code
+
+---
+
+[![CV Preview](./cv-preview.png)](./build/main.pdf)
+
+*Click the image above to view or download the full PDF.*
