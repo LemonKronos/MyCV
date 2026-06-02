@@ -31,7 +31,7 @@
         Dataset: 180MB
     \end{twmnotebook}
     \twmhline
-    \begin{twmnotebook}[\linewidth]{Project\_Acrobatic\_Drone.md}[0pt][height=\dimexpr 325pt - 2pt\relax]
+    \begin{twmnotebook}[\linewidth]{Project\_Acrobatic\_Drone.md}[0pt][height=325pt]
 \textbullet \quad \textcolor{chillgreen}{Execution:} Collected expert control inputs and telemetry data in Gazebo to build a training dataset. The simulation environment consisted of a procedurally generated obstacle-tunnel world. Models were trained offline and evaluated through both offline testing and real-time user-controlled flight scenarios.\\
 \textbullet \quad \textcolor{chillgreen}{Results:} Successfully validated the non-AI control pipeline, including low-level obstacle avoidance, achieving autonomous flights of up to 1 km without collisions. However, the AI-controlled system produced noisy outputs and occasionally conflicted with user inputs, resulting in unstable flight behavior. Simulated latency average 290us\\
 \textbullet \quad \textcolor{chillgreen}{Diagnosed:} Early model outputs revealed limitations in the design and data flow between high and low layers, indicated the need for an improved model and larger training datasets.\\
