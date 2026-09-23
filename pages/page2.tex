@@ -1,8 +1,9 @@
 
 \noindent
 
+%_ Multidisciplinary Project
 \begin{minipage}{\dimexpr 0.5\textwidth-2pt\relax}
-    \begin{twmnotebook}[\linewidth]{Project\_Acrobatic\_Drone.md}[0pt][height=325pt]
+    \begin{twmnotebook}[\linewidth]{Multidisciplinary\_Project\_AI\_Oriented.md}[0pt][height=325pt]
 \textcolor{chillblue}{Project: Full-Pipeline Acrobatic Drone based on Latent Imitation Learning}\\
 \textbullet \quad \textcolor{chillgreen}{Latent Imitation Learning:} Trains an AI model to imitate expert pilot behavior using latent space representations and performance-based evaluation, enabling policies that can potentially surpass the original demonstrations.\\
 \textbullet \quad \textcolor{chillgreen}{Goal:} framework designed to act as an "AI Co-pilot," denoising erratic, suboptimal human inputs into safe, expert-level 3D trajectories.\\
@@ -13,9 +14,9 @@
     \begin{twmimage}[\dimexpr 0.7\linewidth-2pt\relax]{Test\_Control\_World.png}[height=\dimexpr 125pt - 2pt\relax, valign=center, halign=center]
         \includegraphics[width=\linewidth, height=\tcbtextheight, keepaspectratio]{figure/test_control_world.png}
     \end{twmimage}%
-    \twmgap%
-    \begin{twmimage}[\dimexpr 0.3\linewidth-2pt\relax]{Pipeline.png}[height=\dimexpr 125pt - 2pt\relax, valign=center, halign=center]
-        \includegraphics[width=\linewidth, height=\tcbtextheight, keepaspectratio]{figure/OverviewPipeline.png}
+    \twmgap%_ Replace this with VTOL
+    \begin{twmimage}[\dimexpr 0.3\linewidth-2pt\relax]{VTOL.png}[height=\dimexpr 125pt - 2pt\relax, valign=center, halign=center]
+        \includegraphics[width=\linewidth, height=\tcbtextheight]{figure/AlphaMinus1_cut.png}
     \end{twmimage}
 \end{minipage}%
 \twmgap%
@@ -24,14 +25,11 @@
         \includegraphics[width=\linewidth, height=\tcbtextheight, keepaspectratio]{figure/DemoDrone2.png}
     \end{twmimage}%
     \twmgap%
-    \begin{twmnotebook}[\dimexpr  0.3\linewidth-2pt\relax]{AI\_train.md}[0pt][height=\dimexpr 125pt - 2pt\relax]
-        Layer: 12\\
-        Total params:88.5M\\
-        Estimated size: 354MB\\
-        Dataset: 180MB
-    \end{twmnotebook}
+    \begin{twmimage}[\dimexpr 0.3\linewidth-2pt\relax]{Pipeline.png}[height=\dimexpr 125pt - 2pt\relax, valign=center, halign=center]
+        \includegraphics[width=\linewidth, height=\tcbtextheight, keepaspectratio]{figure/OverviewPipeline.png}
+    \end{twmimage}
     \twmhline
-    \begin{twmnotebook}[\linewidth]{Project\_Acrobatic\_Drone.md}[0pt][height=325pt]
+    \begin{twmnotebook}[\linewidth]{Multidisciplinary\_Project\_AI\_Oriented.md}[0pt][height=325pt]
 \textbullet \quad \textcolor{chillgreen}{Execution:} Collected expert control inputs and telemetry data in Gazebo to build a training dataset. The simulation environment consisted of a procedurally generated obstacle-tunnel world. Models were trained offline and evaluated through both offline testing and real-time user-controlled flight scenarios.\\
 \textbullet \quad \textcolor{chillgreen}{Results:} Successfully validated the non-AI control pipeline, including low-level obstacle avoidance, achieving autonomous flights of up to 1 km without collisions. However, the AI-controlled system produced noisy outputs and occasionally conflicted with user inputs, resulting in unstable flight behavior. Simulated latency average 290us\\
 \textbullet \quad \textcolor{chillgreen}{Diagnosed:} Early model outputs revealed limitations in the design and data flow between high and low layers, indicated the need for an improved model and larger training datasets.\\
@@ -42,29 +40,23 @@
 
 \twmhline
 
-\begin{twmnotebook}[\dimexpr 0.7\textwidth-2pt\relax]{Edge\_AI\_Greenhouse\_Project.md}[0pt][height=110pt]
-    \textcolor{chillgreen}{Goal:} Train a regression model to predict the correct irrigation amount for a greenhouse, and deploy it on an edge IoT device.\\
-    \textcolor{chillgreen}{Principle:} In Python, build a LightGBM regression model on the dataset, prune unimportant features. After that, using TL2cgen libabry, convert the model into C code, then compile it to binary and run directly on an ESP32. On the Embedded side, ESP32 handles sensor filtering and formating, communication, safeguards and sleep scheduling.\\
+%_ Internship Project
+\begin{twmnotebook}[\dimexpr 0.5\textwidth-2pt\relax]{Internship\_Work.md}[0pt][height=340pt]
+    \textcolor{chillblue}{Project: Cross-Platform ITAM Endpoint Device Agent}\\
+    \textbullet \quad \textcolor{chillgreen}{Goal:} Develop a lightweight, memory-safe IT asset monitoring daemon for Linux and Windows.\\
+    \textbullet \quad \textcolor{chillgreen}{Main components:} Rust, Tokio, Unix Domain Sockets, Min-Heap scheduler, flamegraph, hyperfine.\\
+    \textbullet \quad \textcolor{chillgreen}{Principle:} Architecture is decoupled into discrete binaries (launcher, worker, fetcher) linked by IPC. This isolates faults-a fetcher panic will not crash the main daemon. Precise task scheduling is managed via a custom Min-Heap scheduler.\\
+    \textbullet \quad \textcolor{chillgreen}{Execution:} Built the multi-binary Rust agent handling OS-specific system calls. Implemented the IPC layer for data passing and profiled memory/CPU bottlenecks using flamegraphs and hyperfine.\\
+    \textbullet \quad \textcolor{chillgreen}{Results:} Successfully delivered a functioning cross-platform agent capable of scheduled data fetching and resilient inter-process communication without memory leaks.\\
+    \textbullet \quad \textcolor{chillgreen}{Summarize:} Delivered a foundational MVP, successfully demonstrating Rust's utility as a highly effective choice for building memory-safe, low-overhead system architectures.
 \end{twmnotebook}%
-\twmgap%
-\begin{twmimage}[\dimexpr 0.3\textwidth-2pt\relax]{Irrigation\_Comparison.png}[height=110pt, valign=center, halign=center]
-    \includegraphics[width=\linewidth, height=\tcbtextheight, keepaspectratio]{figure/first_100_samples.png}
-\end{twmimage}
-
-\twmhline
-
-\begin{twmnotebook}[\dimexpr 0.7\textwidth-2pt\relax]{Simple\_IoT\_Projects.md}[0pt][height=110pt]
-    \textcolor{chillgreen}{Goals:} Integrate multiple sensors using STM32, then evaluate and display sensor data using LCD, LEDs indicator and send data to web server via ESP32 wifi module.\\
-    \textcolor{chillgreen}{Execution:} Read datasheets and developed driver for sensors, LCD, LEDs. Implemented I2C communication between sensors and STM32, and UART communication between STM32 and ESP32. Set up RTOS scheduler on STM32. Developed and deployed a web server using Next.js\\
-\end{twmnotebook}%
-\twmgap%
-\begin{twmimage}[\dimexpr 0.3\textwidth-2pt\relax]{IoT\_Diagram.png}[height=110pt, valign=center, halign=center]
-    \includegraphics[width=\linewidth, height=\tcbtextheight, keepaspectratio]{figure/blockdiagaram.png}
-\end{twmimage}
-
-\twmhline
-
-\begin{twmnotebook}[\dimexpr \textwidth-2pt\relax]{Academic\_vs\_Practical\_Metrics.log \hypertarget{GPA}{}}[0pt][]
-\textbullet \quad \textcolor{chillblue}{Reality:} While my GPA is 2.5/4.0, I have focused heavily on researching, designing, and building real-world engineering systems beyond the classroom.\\
-\textbullet \quad \textcolor{chillblue}{Evidence:} Classroom scores measure test retention, but engineering requires execution. The projects documented above demonstrate my ability to develop functional software and embedded systems. All source code is available on GitHub, and I am available to provide a live demonstration upon request.
+\twmgap%_ Capstone Project
+\begin{twmnotebook}[\dimexpr 0.5\textwidth-2pt\relax]{Capstone\_Project\_Plan.md}[0pt][height=340pt]
+    \textcolor{chillblue}{Project: VTOL Acrobatic Control \& Twin Obstacle Avoidance Architecture}\\
+    \textcolor{chillgreen}{Goals:} Design an AI-driven control pipeline that explores and exploits the highly non-linear flight envelope of VTOL while maintaining deterministic spatial safety.\\
+    \textcolor{chillgreen}{Main components:} C++, ROS2 (Jazzy), PyTorch (RL), Mixture of Experts (MoE), Voxblox (ESDF), Gazebo Harmonic, PX4 Autopilot.\\
+    \textcolor{chillgreen}{Principle:} Engineered a "Twin OA" architecture. The Acrobatic OA utilizes a Reinforcement Learning Mixture of Experts (MoE) network—featuring hardware-specific experts and a mixing layers—to generate complex actuator sequences and predicted states. These probabilistic AI outputs are strictly validated by the Reactive OA, which performs deterministic collision checks using a continuous Voxblox ESDF map. Validated states bypass the rigid PX4 mixer for direct acrobatic execution, while rejected states instantly trigger a spatial safety fallback.\\
+    \textcolor{chillgreen}{Summarize:} Proposing a novel, mathematically validated AI architecture designed to safely push VTOL hardware to its aerodynamic limits without relying on static control mixers.
 \end{twmnotebook}
+
+
