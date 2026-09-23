@@ -3,9 +3,9 @@
 Computer Engineering student with a strong focus on AI and Robotics
 
 ### Core Stack
-* **Languages:** C++, Python, Shell script
+* **Languages:** C++, Python, Rust, Shell script
 * **Robotics & Simulation:** ROS2, Gazebo, PX4 Autopilot
-* **AI & Data:** Latent Diffusion Models
+* **AI & Data:** Latent Diffusion Models, Reinforcement Learning
 * **Tools:** Linux, Git, VS Code
 
 ---
