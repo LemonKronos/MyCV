@@ -52,11 +52,11 @@
 \end{twmnotebook}%
 \twmgap%_ Capstone Project
 \begin{twmnotebook}[\dimexpr 0.5\textwidth-2pt\relax]{Capstone\_Project\_Plan.md}[0pt][height=340pt]
-    \textcolor{chillblue}{Project: VTOL Acrobatic Control \& Twin Obstacle Avoidance Architecture}\\
+    \textcolor{chillblue}{Project: VTOL Acrobatic flight enhancement and Obstacle Avoidance with RL}\\
     \textcolor{chillgreen}{Goals:} Design an AI-driven control pipeline that explores and exploits the highly non-linear flight envelope of VTOL while maintaining deterministic spatial safety.\\
-    \textcolor{chillgreen}{Main components:} C++, ROS2 (Jazzy), PyTorch (RL), Mixture of Experts (MoE), Voxblox (ESDF), Gazebo Harmonic, PX4 Autopilot.\\
-    \textcolor{chillgreen}{Principle:} Engineered a "Twin OA" architecture. The Acrobatic OA utilizes a Reinforcement Learning Mixture of Experts (MoE) network—featuring hardware-specific experts and a mixing layers—to generate complex actuator sequences and predicted states. These probabilistic AI outputs are strictly validated by the Reactive OA, which performs deterministic collision checks using a continuous Voxblox ESDF map. Validated states bypass the rigid PX4 mixer for direct acrobatic execution, while rejected states instantly trigger a spatial safety fallback.\\
-    \textcolor{chillgreen}{Summarize:} Proposing a novel, mathematically validated AI architecture designed to safely push VTOL hardware to its aerodynamic limits without relying on static control mixers.
+    \textcolor{chillgreen}{Main components:} C++, ROS2 (Jazzy), PyTorch (RL), Voxblox (ESDF), Gazebo Harmonic, PX4 Autopilot.\\
+    \textcolor{chillgreen}{Principle:} Designed an AI-enhanced control system architecture, aimed at providing expert-level control capabilities to pilots of all skill levels. The Acrobatic AI input include control intent (human pilot or planer), drone state (estimated by PX4) and a spatial extraction from the Voxblox ESDF map, latent by a 3D CNN. RL training happen progressively from Hover -> Tracking -> Obstacle avoidance, each task with it own reward and an entropy objective to explore the flight envelope. The output are normalized actuator control signal, sent to PX4 mixer to perform action. There a deterministic Reactive fallback with simple APF path planning for extra safety.\\
+    \textcolor{chillgreen}{Summarize:} Proposing a novel, pilot intent driven AI architecture designed to maximize VTOL flight capability while maintaining a collision safety.
 \end{twmnotebook}
 
 
